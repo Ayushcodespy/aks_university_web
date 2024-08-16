@@ -16,8 +16,12 @@ cursor.execute("SELECT * FROM BATCH2022")
 
 result = cursor.fetchall()
 
+@app.route('/')
+def home():
+    return render_template("login.html")
 
-@app.route("/")
+
+@app.route("/data")
 def hello_world():
     return render_template("index.html", results=result)
 
