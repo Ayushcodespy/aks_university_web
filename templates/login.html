@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html{
+            height: 100%
+        }
+
+        body{
+            height: 99%;
+            background-image: url('/static/images/bg-image.jpg');
+            background-size: cover;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        .login-container {
+            /* height: 500px; */
+            width: 300px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            align-content: center;
+        }
+
+        .login-container h2{
+            font-family: Arial;
+        }
+
+        .login-container input{
+            width: 80%;
+            padding: 10PX;
+            margin: 10PX;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .login-container button{
+            width: 80%;
+            padding: 10px;
+            margin: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover{
+            background-color: #168730;
+            transition: ease 0.3s;
+        }
+
+        .login-container a {
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+        color: blue;
+        font-size: 16.3px;
+        transition: ease-in-out 200ms;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="/login">
+            <input type="text" placeholder="User ID" required>
+            <input type="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p><a href="">Forgot Password</a></p>
+        <p>Don't have an account? <br><a href="">Create New</a></p>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+<!-- <style>
+    html{
+        height: 100%;
+        margin: 0;
+    }
+    body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url('/static/images/bg-image.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        font-family: Arial, sans-serif;
+    }
+    .login-container {
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        width: 300px;
+        text-align: center;
+    }
+    .login-container h2 {
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+    .login-container input[type="text"],
+    .login-container input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+    .login-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .login-container button:hover {
+        background-color: #218838;
+    }
+</style>
+</head>
+<body>
+<div class="login-container">
+    <h2>Login</h2>
+    <form>
+        <input type="text" placeholder="Username" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+</body> -->
