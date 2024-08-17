@@ -5,18 +5,30 @@
     <title>Title</title>
 </head>
 <body>
-<TABLE border="1">
+<TABLE border="1" style="width: 100%;">
 
-    <tr>
+    <tr style="margin: 10px;">
         <th>Student Code</th>
         <th>Student Name</th>
-        <th>Course Name</th>
+        <th>Fathers Name</th>
+        <th>Mothers Name</th>
+        <th>DOB</th>
+        <th>Gender</th>
+        <th>Relegion</th>
+        <th>Category</th>
+        <th>Email</th>
     </tr>
-    {% for i in results %}
+    {% for i in student %}
         <tr>
             <td>{{ i[0] }}</td>
             <td>{{ i[1] }}</td>
             <td>{{ i[2] }}</td>
+            <td>{{ i[3] }}</td>
+            <td>{{ i[4] }}</td>
+            <td>{{ i[5] }}</td>
+            <td>{{ i[6] }}</td>
+            <td>{{ i[7] }}</td>
+            <td>{{ i[8] }}</td>
         </tr>
     {% endfor %}
 
