@@ -213,3 +213,78 @@ main {
         margin-left: 3.6em;
     }
 }
+
+
+
+
+/* -- Profile page Styles -- */
+.profile {
+    font-family: Arial, Helvetica, sans-serif;
+}
+.profile-header{
+    font-family: cursive;
+    margin-top: 10px;
+    margin-right: 1px;
+    height: 70px;
+    background: linear-gradient(270deg, #ee8f6785 10%, #62ecdec8 100%);
+    text-align: center;
+    align-content: center;
+}
+
+.profile-header h2{
+    font-weight: bolder;
+}
+
+@media screen and (max-width: 700px){
+    .profile-header{
+        height: 45px;
+        margin-top: 6px;
+    }
+    .profile-header h2{
+        font-size: larger;
+    }
+}
+
+.profile-contents {
+    border: solid black 1px;
+    display: flex;
+}
+
+.profile-left-container {
+    flex: 1;
+    background-color: #c8c9f3be;
+    font-size: larger;
+    align-content: center;
+    height: 300px;
+    padding-left: 30px;
+}
+
+.profile-image-container {
+    height: 240px;
+    width: 200px;
+    border: #033f72 1px;
+    background-color: antiquewhite;
+}
+.profile-image-container img{
+    height: 240px;
+    width: 200px;
+}
+
+.profile-batch {
+    font-weight: 700;
+}
+
+
+
+
+.profile-right-container {
+    flex: 4;
+}
+
+.profile-department h5 {
+    font-weight: 700;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 30px;
+    padding-right: 30px;
+}
