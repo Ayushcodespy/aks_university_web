@@ -13,9 +13,10 @@ mydb = mysql.connector.connect(
 
 cursor = mydb.cursor()
 
+
 @app.route('/')
 def home():
-    return render_template("login.html")
+    return render_template("index.html", active_page='home')
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -23,15 +24,25 @@ def login():
     if request.method == "POST":
         username = request.form['user_id']
         password = request.form['passwd']
-        login = cursor.execute(f"Select Student_ID, Password from login where Student_ID = '{username}' AND Password = '{password}'")
+        login = cursor.execute(
+            f"Select Student_ID, Password from login where Student_ID = '{username}' AND Password = '{password}'")
         login = cursor.fetchone()
-        if (username == login[0] and password == login[1]):
-            students = cursor.execute(f"Select Students.* from Students, Login where Students.Student_ID = '{username}' and Students.Student_ID = Login.Student_ID")
+        if username == login[0] and password == login[1]:
+            students = cursor.execute(
+                f"Select Students.* from Students, Login where Students.Student_ID = '{username}' and Students.Student_ID = Login.Student_ID")
             students = cursor.fetchall()
             return render_template('index.html', student=students)
         else:
             return render_template("login.html", error='Incorrect login details!')
-        
+
+@app.route("/profile")
+def profile():
+    return render_template("profile_page.html", active_page='profile')
+
+
+@app.route("/contact")
+def contact():
+    return render_template("contact_page.html", active_page='contact')
 
 
 if __name__ == "__main__":
