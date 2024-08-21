@@ -1,22 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/static/styles/profile_page.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul class="menu">
-                <li title="home"><a href="/" class="menu-button home">home</a></li>
-                <li title="about"><a href="/profile" class="active about">about</a></li>
-                <li title="search"><a href="#" class="search">search</a></li>
-                <li title="pencil"><a href="#" class="pencil">pencil</a></li>
-                <li title="archive"><a href="#" class="archive">archive</a></li>
-                <li title="contact"><a href="#" class="contact">contact</a></li>
-            </ul>
-        </nav>
-    </header>
-</body>
-</html>
+{% extends 'common_navbar.html' %}
+{% block body %}
+
+<main class="profile">
+    <section class="profile-header">
+        <h2>Student Profile</h2>
+    </section>
+    <section class="profile-contents">
+        <div class="profile-left-container">
+            <div class="profile-image-container">
+                <img src="/static/images/aks-logo.png" alt="">
+            </div>
+            <h5 class="profile-batch">Batch : 2022 - 26</h5>
+        </div>
+
+        <div class="profile-right-container">
+            <div class="profile-department">
+                <h5>DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING</h5><hr>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
