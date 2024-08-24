@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, session, url_for
 
 app = Flask(__name__)
+app.secret_key = "super-secret-key"
 
 import mysql.connector
 
@@ -13,37 +14,49 @@ mydb = mysql.connector.connect(
 
 cursor = mydb.cursor()
 
-
 @app.route('/')
 def home():
-    return render_template("index.html", active_page='home')
-
+    if 'user' in session :
+        cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
+        result = cursor.fetchone()
+        return render_template("profile_page.html", active_page='home', details = result)
+    
+    else:
+        return redirect(url_for('login'))
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+    if 'user' in session : 
+        return redirect(url_for('home'))
+
     if request.method == "POST":
         username = request.form['user_id']
         password = request.form['passwd']
-        login = cursor.execute(
-            f"Select Student_ID, Password from login where Student_ID = '{username}' AND Password = '{password}'")
+        login = cursor.execute("Select Student_ID, Password from login where Student_ID = %s AND Password = %s", (username, password))
         login = cursor.fetchone()
-        if username == login[0] and password == login[1]:
-            students = cursor.execute(
-                f"Select Students.* from Students, Login where Students.Student_ID = '{username}' and Students.Student_ID = Login.Student_ID")
-            students = cursor.fetchall()
-            return render_template('index.html', student=students)
+        if login :
+            session['user'] = login[0]
+            return render_template('index.html')
         else:
             return render_template("login.html", error='Incorrect login details!')
+    return render_template('login.html')
+
 
 @app.route("/profile")
 def profile():
-    return render_template("profile_page.html", active_page='profile')
+    if 'user' in session :
+        cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
+        result = cursor.fetchone()
+        return render_template("profile_page.html", active_page='profile', details = result)
+    
+    else:
+        return redirect(url_for('login'))
 
-
-@app.route("/contact")
-def contact():
-    return render_template("contact_page.html", active_page='contact')
-
+@app.route("/logout")
+def logout():
+    if 'user' in session:
+        session.pop('user')
+    return redirect(url_for('login'))
 
 if __name__ == "__main__":
     app.run(debug=True)
