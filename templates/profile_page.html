@@ -8,7 +8,7 @@
     <section class="profile-contents">
         <div class="profile-left-container">
             <div class="profile-image-container">
-                <img src="/static/images/aks-logo.png" alt="">
+                <img src="{{ url_for('get_image', student_id=details[0]) }}" alt="Profile Image">
             </div>
             <h5 class="profile-batch">Batch : 2022 - 26</h5>
         </div>
@@ -24,12 +24,14 @@
                         <p>Name :</p>
                         <p>Course :</p>
                         <p>Current Semester :</p>
+                        <p>Admission Date :</p>
                     </div>
 
                     <div class="profile-details_2">
                         <p>{{ details[2] }}</p>
                         <p>{{ details[4] }}</p>
-                        <p>{{ details[3]}} Sem.</p>
+                        <p>{{ details[3] }} Sem.</p>
+                        <p>{{ details[6] }}</p>
                     </div>
                 </div>
 
@@ -37,18 +39,102 @@
                     <div class="profile-details_3">
                         <p>Student Code :</p>
                         <p>Enrollment No. :</p>
+                        <p>Date Of Birth :</p>
                         <p>Admission Category :</p>
                     </div>
 
                     <div class="profile-details_4">
                         <p>{{ details[0] }}</p>
                         <p>{{ details[1] }}</p>
+                        <p>{{ details[6] }}</p>
                         <p>{{ details[5] }} Based</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="std-container">
+        <h2 class="std-title">Student Profile :</h2>
+        <div class="std-tabs">
+            <button class="std-tablinks active" onclick="openTab(event, 'Personal')">Personal Details</button>
+            <button class="std-tablinks" onclick="openTab(event, 'Contact')">Contact Details</button>
+            <button class="std-tablinks" onclick="openTab(event, 'Qualification')">Qualification</button>
+            <button class="std-tablinks" onclick="openTab(event, 'Document')">Document</button>
+            <button class="std-tablinks" onclick="openTab(event, 'Academic')">Academic Info</button>
+        </div>
+    
+        <div id="Personal" class="std-tabcontent" style="display: block;">
+            <h3>Personal Details</h3>
+            <div class="std-personal-section">
+                <div class="std-details">
+                    <p><strong>Student Name:</strong> AYUSH PATEL</p>
+                    <p><strong>Name as Aadhar:</strong> AYUSH PATEL</p>
+                    <p><strong>Student Code:</strong> B2255R10106223</p>
+                    <p><strong>MP Online Admission ID:</strong> 388629742724</p>
+                    <p><strong>ABC ID:</strong> 362678071520</p>
+                    <p><strong>Course Name:</strong> B.Tech.-Computer Science & Engineering-5 Semester</p>
+                    <p><strong>Student Status:</strong> <span class="std-status">Current</span></p>
+                </div>
+                <div class="std-extra-details">
+                    <p><strong>Faculty Name:</strong> FACULTY OF ENGINEERING AND TECHNOLOGY</p>
+                    <p><strong>Date of Birth:</strong> 10-Mar-2003</p>
+                    <p><strong>Gender:</strong> Male</p>
+                    <p><strong>Father's Name:</strong> VINOD KUMAR PATEL</p>
+                    <p><strong>Mother's Name:</strong> MUNNI DEVI</p>
+                    <p><strong>Nationality:</strong> INDIAN</p>
+                    <p><strong>Category:</strong> OBC</p>
+                    <p><strong>Religion:</strong> HINDU</p>
+                    <p><strong>Marital Status:</strong> S</p>
+                    <p><strong>Blood Group:</strong></p>
+                    <p><strong>Aadhar Number:</strong> 362678071520</p>
+                </div>
+            </div>
+        </div>
+    
+        <div id="Contact" class="std-tabcontent">
+            <h3>Contact Details</h3>
+            <div class="std-contact-section">
+                <h4>--Temporary Contact--</h4>
+                <p><strong>Address :</strong> KHOHI, BARDAR SATNA MP 485331</p>
+                <p><strong>State :</strong> MADHYA PRADESH</p>
+                <p><strong>City :</strong> SATNA</p>
+                <p><strong>PinCode :</strong> NA</p>
+                <p><strong>Mobile No:</strong> 6307425700</p>
+                <p><strong>Parent Mobile No:</strong></p>
+                <p><strong>Email:</strong></p>
+            </div>
+    
+            <div class="std-contact-section">
+                <h4>--Permanent Contact--</h4>
+                <p><strong>Address :</strong> NA</p>
+                <p><strong>State :</strong> MADHYA PRADESH</p>
+                <p><strong>City :</strong> SATNA</p>
+                <p><strong>PinCode :</strong> NA</p>
+                <p><strong>Mobile No:</strong> 6307425700</p>
+                <p><strong>Parent Mobile No:</strong></p>
+                <p><strong>Email:</strong> ayush.jnv54@gmail.com</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("std-tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("std-tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+    
+
 </main>
 
 {% endblock %}

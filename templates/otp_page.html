@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .otp-verification {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .otp-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .otp-header h2 {
+            margin: 0;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <main class="otp-verification">
+        <section class="otp-header">
+            <h2>Verify OTP</h2>
+        </section>
+        <section class="otp-contents">
+            <form id="otp-form" action="/verify_otp" method="post">
+                <div class="form-group">
+                    <label for="otp">Enter OTP:</label>
+                    <input type="text" id="otp" name="otp" required>
+                </div>
+                <button type="submit">Verify OTP</button>
+                <div class="error-message" id="error-message">
+                    <!-- Error message can be dynamically inserted here -->
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
+

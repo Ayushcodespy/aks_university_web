@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password</title>
+    <link rel="stylesheet" href="/static/styles/forget_pwd.css"> <!-- Link to your CSS file for styling -->
+</head>
+<body>
+    <main class="forgot-password">
+        <section class="forgot-password-header">
+            <h2>Forgot Password</h2>
+        </section>
+        <section class="forgot-password-contents">
+            <form id="forgot-password-form" action="/send_otp" method="post">
+                <div class="form-group">
+                    <label for="student_code">Student Code:</label>
+                    <input type="text" id="student_code" name="student_code" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" required>
+                </div>
+                <button type="submit">Send OTP</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
+
