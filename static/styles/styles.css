@@ -140,6 +140,7 @@
 }
 
 .image-container {
+    justify-items: center;
     height: 60px;
     width: 60px;
     background-color: yellow;
@@ -148,7 +149,9 @@
 }
 
 .image-container img {
-    height: 60px;
+    /* object-fit: cover; */
+    background-size: cover;
+    height: 70px;
     width: auto;
 }
 
@@ -369,5 +372,181 @@ main {
 
     .profile-details_3 {
         margin-left: 0px;
+    }
+}
+
+
+
+/* ----------------------------- */
+
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f2f5;
+}
+
+.std-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.std-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #333;
+    font-weight: 600;
+}
+
+.std-tabs {
+    display: flex;
+    justify-content: center;
+    border-bottom: 3px solid #007bff;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Allows tabs to wrap on smaller screens */
+}
+
+.std-tablinks {
+    background-color: #f0f2f5;
+    border: none;
+    outline: none;
+    padding: 15px 25px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin: 5px; /* Space between tabs */
+}
+
+.std-tablinks.active {
+    background-color: #ffffff;
+    border-bottom: 3px solid #007bff;
+    color: #007bff;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.std-tablinks:hover {
+    background-color: #e2e6ea;
+}
+
+.std-tabcontent {
+    display: none;
+    padding: 20px;
+}
+
+.std-tabcontent h3 {
+    font-size: 22px;
+    color: #007bff;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.std-personal-section,
+.std-contact-section {
+    margin-bottom: 25px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.std-photo img {
+    max-width: 150px;
+    border-radius: 50%;
+    border: 3px solid #007bff;
+    display: block;
+    margin: 0 auto;
+}
+
+.std-details p,
+.std-extra-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.std-details p strong,
+.std-extra-details p strong {
+    display: inline-block;
+    width: 300px; /* Adjust as needed for alignment */
+    font-weight: 600;
+    color: #555;
+}
+
+.std-details p,
+.std-extra-details p {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.std-status {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.std-contact-section h4 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.std-contact-section p {
+    margin: 8px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .std-container {
+        padding: 15px;
+    }
+
+    .std-title {
+        font-size: 24px;
+    }
+
+    .std-tablinks {
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+
+    .std-details p strong,
+    .std-extra-details p strong {
+        width: 150px; /* Reduce width for smaller screens */
+    }
+
+    .std-personal-section,
+    .std-contact-section {
+        padding: 15px;
+    }
+   
+}
+
+@media (max-width: 480px) {
+    .std-title {
+        font-size: 20px;
+    }
+
+    .std-tablinks {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    .std-details p strong,
+    .std-extra-details p strong {
+        width: 120px; /* Further reduce width for very small screens */
     }
 }
