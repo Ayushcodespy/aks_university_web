@@ -32,7 +32,7 @@ def home():
     if 'user' in session :
         cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
         result = cursor.fetchone()
-        return render_template("profile_page.html", active_page='home', details = result)
+        return render_template("index.html", active_page='home', details = result)
     
     else:
         return redirect(url_for('login'))

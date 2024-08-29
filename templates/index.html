@@ -1,9 +1,185 @@
-
 {% extends 'common_navbar.html' %}
 {% block body %}
 
-    <main>
-        
-    </main>
+<style>
+    .home {
+        font-family: Arial, sans-serif;
+        color: #333;
+        padding: 20px;
+    }
+
+    .hero-section {
+        /* background: url('{{ url_for('static', filename='images/hero-bg.jpg') }}') no-repeat center center/cover; */
+        padding: 100px 20px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+
+    .hero-content p {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .hero-button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+
+    .features-section {
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .features-section h2 {
+        font-size: 36px;
+        margin-bottom: 30px;
+    }
+
+    .features-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .feature-box {
+        width: 30%;
+        background: #f7f7f7;
+        padding: 20px;
+        margin: 10px;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .feature-box img {
+        max-width: 100px;
+        margin-bottom: 20px;
+    }
+
+    .feature-box h3 {
+        font-size: 24px;
+        margin-bottom: 15px;
+    }
+
+    .feature-box p {
+        font-size: 16px;
+        color: #666;
+    }
+
+    .announcement-section {
+        background-color: #f1f1f1;
+        padding: 50px 20px;
+    }
+
+    .announcement-section h2 {
+        font-size: 36px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .announcement-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .announcement {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .announcement h4 {
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .announcement p {
+        font-size: 16px;
+        color: #666;
+    }
+
+    .footer-section {
+        background-color: #333;
+        color: #fff;
+        padding: 20px 0;
+        text-align: center;
+    }
+
+    .footer-section p {
+        margin: 5px 0;
+    }
+
+    @media (max-width: 768px) {
+        .feature-box {
+            width: 100%;
+        }
+    }
+</style>
+
+<main class="home">
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to the University LMS Portal</h1>
+            <p>Your gateway to a smarter learning experience.</p>
+            <a href="{{ url_for('profile') }}" class="hero-button">View Profile</a>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <h2>Features</h2>
+        <div class="features-container">
+            <div class="feature-box">
+                <img src="{{ url_for('static', filename='images/feature1.png') }}" alt="Feature 1">
+                <h3>Personalized Dashboard</h3>
+                <p>Access all your courses, grades, and more in one place.</p>
+            </div>
+            <div class="feature-box">
+                <img src="{{ url_for('static', filename='images/feature2.png') }}" alt="Feature 2">
+                <h3>Online Resources</h3>
+                <p>Find study materials, e-books, and more at your fingertips.</p>
+            </div>
+            <div class="feature-box">
+                <img src="{{ url_for('static', filename='images/feature3.png') }}" alt="Feature 3">
+                <h3>Interactive Learning</h3>
+                <p>Participate in discussions, quizzes, and assignments.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="announcement-section">
+        <h2>Announcements</h2>
+        <div class="announcement-container">
+            <div class="announcement">
+                <h4>New Semester Schedule Released</h4>
+                <p>The schedule for the new semester is now available. Please check your timetable.</p>
+            </div>
+            <div class="announcement">
+                <h4>Online Classes Update</h4>
+                <p>All classes will be conducted online until further notice. Please join via the LMS portal.</p>
+            </div>
+            <div class="announcement">
+                <h4>Upcoming Exams</h4>
+                <p>Exams are scheduled for next month. Ensure you are prepared and have submitted all assignments.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer-section">
+        <div class="footer-content">
+            <p>&copy; 2024 University LMS. All Rights Reserved.</p>
+            <p>Contact Us: info@universitylms.edu | +91 12345 67890</p>
+        </div>
+    </section>
+</main>
 
 {% endblock %}
