@@ -58,7 +58,11 @@ def login():
 @app.route("/profile")
 def profile():
     if 'user' in session :
-        cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
+        # cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
+        cursor.execute('''SELECT Students.*, Departments.Department_Name
+                       FROM Students
+                       JOIN Departments ON Students.Dept_ID = Departments.Department_ID
+                        WHERE STUDENT_ID = %s''', (session['user'],))
         result = cursor.fetchone()
         return render_template("profile_page.html", active_page='profile', details = result)
     
@@ -78,7 +82,8 @@ def get_image(student_id):
 @app.route('/fees')
 def fees():
 
-    cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
+    # cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
+    cursor.execute('''Select * FROM STUDENTS WHERE STUDENT_ID = %s''', (session['user'],))
     result = cursor.fetchone()
     return render_template("fee_page.html", result=result)
 
