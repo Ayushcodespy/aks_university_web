@@ -1,0 +1,209 @@
+{% extends 'common_navbar.html' %}
+{% block body %}
+
+<style>
+    .fees-tabs {
+    display: flex;
+    justify-content: center;
+    background-color: #eee;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.tab-button {
+    background-color: #003399;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.tab-button.active {
+    background-color: #551a8b;
+}
+
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.student-details {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.photo {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.info p {
+    margin: 5px 0;
+    flex: 1;
+}
+
+.status {
+    font-weight: bold;
+}
+
+.status.current {
+    color: green;
+}
+
+.status.not-clear {
+    color: red;
+}
+
+.fees-due {
+    color: blue;
+    font-weight: bold;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 0.9em;
+}
+
+table th {
+    background-color: #003399;
+    color: white;
+}
+
+table td input[type="text"] {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.total-fee {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.total-fee p {
+    margin-bottom: 10px;
+}
+
+.pay-button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+@media (max-width: 600px) {
+    .header {
+        font-size: 1.2em;
+    }
+
+    .student-details {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .photo {
+        margin: 0 auto 10px auto;
+    }
+
+    .info p {
+        text-align: center;
+    }
+
+    table th, table td {
+        padding: 8px;
+    }
+
+    .total-fee {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .total-fee p {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .pay-button {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+}
+</style>
+
+<main>
+
+    <div class="-fees-tabs">
+        <button class="tab-button active">Fee Details</button>
+        <button class="tab-button">Transaction Details</button>
+    </div>
+
+    <div class="container">
+        <div class="student-details">
+            <div class="photo"></div>
+            <div class="info">
+                <p><strong>Student Name:</strong> {{result[0]}} - {{result[2]}}</p>
+                <p><strong>Course Name:</strong> {{result[4]}}-Computer Science & Engineering-5 Semester</p>
+                <p><strong>Mobile No:</strong> 6307425700</p>
+                <p><strong>Student Status:</strong> <span class="status current">Current</span></p>
+                <p><strong>Tuition Fees Status:</strong> <span class="status not-clear">NOT CLEAR</span></p>
+                <p><strong>Tuition Fees Due(Rs):</strong> <span class="fees-due">₹15,000.00</span></p>
+            </div>
+        </div>
+
+        <h2>Fees Details</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fees Type</th>
+                    <th>Remaining Fees Amount(Rs)</th>
+                    <th>Other Charges(Rs)</th>
+                    <th>Late Fees(Rs)</th>
+                    <th>Actual Amount To Pay(Rs)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"> TUITION FEE</td>
+                    <td>₹15,000.00</td>
+                    <td>₹0.00</td>
+                    <td>₹0.00</td>
+                    <td><input type="text" value="15000"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="total-fee">
+            <p>Selected Fee Total Amount: <span>₹0.00</span></p>
+            <button class="pay-button">Pay Fee</button>
+        </div>
+    </div>
+
+</main>
+
+{% endblock %}

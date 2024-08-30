@@ -75,6 +75,13 @@ def get_image(student_id):
     else:
         abort(404)
 
+@app.route('/fees')
+def fees():
+
+    cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
+    result = cursor.fetchone()
+    return render_template("fee_page.html", result=result)
+
 @app.route("/logout")
 def logout():
     if 'user' in session:
