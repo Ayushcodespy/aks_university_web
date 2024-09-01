@@ -31,6 +31,7 @@
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: scroll;
 }
 
 .student-details {
@@ -153,6 +154,10 @@ table td input[type="text"] {
         text-align: center;
         margin-top: 10px;
     }
+
+@media (max-width: 600px) {
+    
+}
 }
 </style>
 
@@ -165,19 +170,21 @@ table td input[type="text"] {
 
     <div class="container">
         <div class="student-details">
-            <div class="photo"></div>
+            <!-- <div class="photo">
+                <img src="{{ url_for('get_image', student_id=result[0]) }}" alt="not ">
+            </div> -->
             <div class="info">
                 <p><strong>Student Name:</strong> {{result[0]}} - {{result[2]}}</p>
                 <p><strong>Course Name:</strong> {{result[4]}}-Computer Science & Engineering-5 Semester</p>
                 <p><strong>Mobile No:</strong> 6307425700</p>
                 <p><strong>Student Status:</strong> <span class="status current">Current</span></p>
-                <p><strong>Tuition Fees Status:</strong> <span class="status not-clear">NOT CLEAR</span></p>
-                <p><strong>Tuition Fees Due(Rs):</strong> <span class="fees-due">₹15,000.00</span></p>
+                <p><strong>Tuition Fees Status:</strong> <span class="status not-clear">{{ status }}</span></p>
+                <p><strong>Tuition Fees Due(Rs):</strong> <span class="fees-due">₹ {{ fees }}</span></p>
             </div>
         </div>
 
         <h2>Fees Details</h2>
-        <table>
+        <table >
             <thead>
                 <tr>
                     <th>Fees Type</th>
@@ -190,10 +197,10 @@ table td input[type="text"] {
             <tbody>
                 <tr>
                     <td><input type="checkbox"> TUITION FEE</td>
-                    <td>₹15,000.00</td>
+                    <td>₹ {{ fees }}</td>
                     <td>₹0.00</td>
                     <td>₹0.00</td>
-                    <td><input type="text" value="15000"></td>
+                    <td><input type="text" value="₹ {{ fees }}"></td>
                 </tr>
             </tbody>
         </table>

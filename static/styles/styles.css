@@ -304,6 +304,7 @@ main {
 }
 
 .profile-department h5 {
+    text-transform: uppercase;
     font-weight: 700;
     font-size: 1.8rem;
     text-align: center;

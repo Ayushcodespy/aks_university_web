@@ -1,8 +1,7 @@
-from flask import Flask, Response, abort, g, redirect, render_template, request, session, url_for
+from flask import Flask, Response, abort, redirect, render_template, request, session, url_for
 from flask_mail import Mail, Message
 import mysql.connector
 import random
-
 
 app = Flask(__name__)
 app.secret_key = "super-secret-key"
@@ -27,28 +26,31 @@ mydb = mysql.connector.connect(
 
 cursor = mydb.cursor()
 
+
 @app.route('/')
 def home():
-    if 'user' in session :
+    if 'user' in session:
         cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
         result = cursor.fetchone()
-        return render_template("index.html", active_page='home', details = result)
-    
+        return render_template("index.html", active_page='home', details=result)
+
     else:
         return redirect(url_for('login'))
 
+
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    if 'user' in session : 
+    if 'user' in session:
         return redirect(url_for('home'))
 
     if request.method == "POST":
         username = request.form['user_id']
         password = request.form['passwd']
-        login = cursor.execute("Select Student_ID, Password from login where Student_ID = %s AND Password = %s", (username, password))
-        login = cursor.fetchone()
-        if login :
-            session['user'] = login[0]
+        cursor.execute("Select Student_ID, Password from login where Student_ID = %s AND Password = %s",
+                       (username, password))
+        _login = cursor.fetchone()
+        if _login:
+            session['user'] = _login[0]
             return redirect(url_for('home'))
         else:
             return render_template("login.html", error='Incorrect login details!')
@@ -57,18 +59,19 @@ def login():
 
 @app.route("/profile")
 def profile():
-    if 'user' in session :
+    if 'user' in session:
         # cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
         cursor.execute('''SELECT Students.*, Departments.Department_Name
                        FROM Students
                        JOIN Departments ON Students.Dept_ID = Departments.Department_ID
                         WHERE STUDENT_ID = %s''', (session['user'],))
         result = cursor.fetchone()
-        return render_template("profile_page.html", active_page='profile', details = result)
-    
+        return render_template("profile_page.html", active_page='profile', details=result)
+
     else:
         return redirect(url_for('login'))
-    
+
+
 @app.route('/image/<student_id>')
 def get_image(student_id):
     cursor.execute("SELECT Image FROM STUDENTS WHERE STUDENT_ID = %s", (student_id,))
@@ -79,13 +82,37 @@ def get_image(student_id):
     else:
         abort(404)
 
+
 @app.route('/fees')
 def fees():
-
     # cursor.execute("Select * FROM STUDENTS WHERE STUDENT_ID = %s", (session['user'],))
-    cursor.execute('''Select * FROM STUDENTS WHERE STUDENT_ID = %s''', (session['user'],))
+    cursor.execute('''Select 
+                    Students.*, Departments.Department_Name, Fee_Details.*
+                    FROM Students
+                    JOIN Departments ON Students.Dept_ID = Departments.Department_ID
+                    JOIN Fee_Details ON Students.Student_ID = Fee_Details.Student_ID
+                    WHERE Students.STUDENT_ID = %s ''', (session['user'],))
     result = cursor.fetchone()
-    return render_template("fee_page.html", result=result)
+
+    cursor.fetchall()
+
+    cursor.execute('Select Deposit from Fee_Details where Student_ID = %s', (session['user'],))
+    _fees = cursor.fetchall()
+    paid = 0
+    for i in _fees:
+        print(i)
+        paid += i[0]
+
+    if paid < 60000:
+        amount_to_be_paid = 60000 - paid
+        status = 'NOT CLEAR'
+
+    else:
+        status = 'CLEAR'
+        amount_to_be_paid = 0.00
+    print(amount_to_be_paid)
+    return render_template("fee_page.html", result=result, fees=amount_to_be_paid, status=status)
+
 
 @app.route("/logout")
 def logout():
@@ -98,11 +125,12 @@ def logout():
 def forget_pwd():
     return render_template("forget_pwd.html")
 
+
 @app.route("/send_otp", methods=['GET', 'POST'])
 def send_otp():
     if request.method == 'POST':
-        student_code =request.form['student_code']
-        cursor.execute("Select email from login where student_id = %s",(student_code,))
+        student_code = request.form['student_code']
+        cursor.execute("Select email from login where student_id = %s", (student_code,))
         email = cursor.fetchone()
         email = email[0]
         if email is not None:
@@ -110,11 +138,12 @@ def send_otp():
         otp = random.randint(100000, 999999)
         session['otp'] = otp
         msg_to_user = Message(f'your otp is {otp}', sender='codestech01@gmail.com', recipients=[email])
-        msg_to_user.body = "your otp is " + str(otp) 
+        msg_to_user.body = "your otp is " + str(otp)
         mail.send(msg_to_user)
 
         return render_template('otp_page.html')
-    
+
+
 @app.route("/verify_otp", methods=['GET', 'POST'])
 def verify_otp():
     if request.method == 'POST':
@@ -124,7 +153,7 @@ def verify_otp():
             return render_template("change_pwd.html")
         else:
             session.pop('id')
-            return ("Wrong otp")
+            return "Wrong otp"
 
 
 @app.route("/update_pwd", methods=['GET', 'POST'])
