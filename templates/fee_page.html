@@ -3,162 +3,162 @@
 
 <style>
     .fees-tabs {
-    display: flex;
-    justify-content: center;
-    background-color: #eee;
-    padding: 10px;
-    flex-wrap: wrap;
-}
+        display: flex;
+        justify-content: center;
+        background-color: #eee;
+        padding: 10px;
+        flex-wrap: wrap;
+    }
 
-.tab-button {
-    background-color: #003399;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-}
+    .tab-button {
+        background-color: #003399;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
 
-.tab-button.active {
-    background-color: #551a8b;
-}
+    .tab-button.active {
+        background-color: #551a8b;
+    }
 
-.container {
-    max-width: 900px;
-    margin: 20px auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    overflow: scroll;
-}
-
-.student-details {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-.photo {
-    width: 100px;
-    height: 100px;
-    background-color: #ccc;
-    border-radius: 50%;
-    margin-right: 20px;
-    margin-bottom: 10px;
-}
-
-.info p {
-    margin: 5px 0;
-    flex: 1;
-}
-
-.status {
-    font-weight: bold;
-}
-
-.status.current {
-    color: green;
-}
-
-.status.not-clear {
-    color: red;
-}
-
-.fees-due {
-    color: blue;
-    font-weight: bold;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-    font-size: 0.9em;
-}
-
-table th {
-    background-color: #003399;
-    color: white;
-}
-
-table td input[type="text"] {
-    width: 100%;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.total-fee {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.total-fee p {
-    margin-bottom: 10px;
-}
-
-.pay-button {
-    background-color: green;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-@media (max-width: 600px) {
-    .header {
-        font-size: 1.2em;
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        overflow: scroll;
     }
 
     .student-details {
-        flex-direction: column;
-        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
     }
 
     .photo {
-        margin: 0 auto 10px auto;
+        width: 100px;
+        height: 100px;
+        background-color: #ccc;
+        border-radius: 50%;
+        margin-right: 20px;
+        margin-bottom: 10px;
     }
 
     .info p {
-        text-align: center;
+        margin: 5px 0;
+        flex: 1;
     }
 
-    table th, table td {
-        padding: 8px;
+    .status {
+        font-weight: bold;
+    }
+
+    .status.current {
+        color: green;
+    }
+
+    .status.not-clear {
+        color: red;
+    }
+
+    .fees-due {
+        color: blue;
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    table th,
+    table td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+        font-size: 0.9em;
+    }
+
+    table th {
+        background-color: #003399;
+        color: white;
+    }
+
+    table td input[type="text"] {
+        width: 100%;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
     }
 
     .total-fee {
-        flex-direction: column;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
     }
 
     .total-fee p {
-        text-align: center;
         margin-bottom: 10px;
     }
 
     .pay-button {
-        width: 100%;
-        text-align: center;
-        margin-top: 10px;
+        background-color: green;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 1em;
     }
 
-@media (max-width: 600px) {
-    
-}
-}
+    @media (max-width: 600px) {
+        .header {
+            font-size: 1.2em;
+        }
+
+        .student-details {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .photo {
+            margin: 0 auto 10px auto;
+        }
+
+        .info p {
+            text-align: center;
+        }
+
+        table th,
+        table td {
+            padding: 8px;
+        }
+
+        .total-fee {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .total-fee p {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .pay-button {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {}
+    }
 </style>
 
 <main>
@@ -184,33 +184,56 @@ table td input[type="text"] {
         </div>
 
         <h2>Fees Details</h2>
-        <table >
-            <thead>
-                <tr>
-                    <th>Fees Type</th>
-                    <th>Remaining Fees Amount(Rs)</th>
-                    <th>Other Charges(Rs)</th>
-                    <th>Late Fees(Rs)</th>
-                    <th>Actual Amount To Pay(Rs)</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><input type="checkbox"> TUITION FEE</td>
-                    <td>₹ {{ fees }}</td>
-                    <td>₹0.00</td>
-                    <td>₹0.00</td>
-                    <td><input type="text" value="₹ {{ fees }}"></td>
-                </tr>
-            </tbody>
-        </table>
+        <form action="/payment" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fees Type</th>
+                        <th>Remaining Fees Amount(Rs)</th>
+                        <th>Other Charges(Rs)</th>
+                        <th>Late Fees(Rs)</th>
+                        <th>Actual Amount To Pay(Rs)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox"> TUITION FEE</td>
+                        <td>₹ {{ fees }}</td>
+                        <td>₹0.00</td>
+                        <td>₹0.00</td>
+                        <td><input type="text" id="selected-fee-input" name="selected_fees" value="{{ fees }}"></td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <div class="total-fee">
-            <p>Selected Fee Total Amount: <span>₹0.00</span></p>
-            <button class="pay-button">Pay Fee</button>
-        </div>
+            <div class="total-fee">
+                <p>Selected Fee Total Amount: <span id="total-fee">{{ fees }}</span></p>
+                <button type="submit" class="pay-button">Pay Fee</button>
+            </div>
+        </form>
     </div>
+
+    <script>
+        // Get references to the input field and the span
+        const feeInput = document.getElementById('selected-fee-input');
+        const totalFeeSpan = document.getElementById('total-fee');
+
+        // Function to update the total fee
+        function updateTotalFee() {
+            const feeValue = feeInput.value.replace(/[₹,]/g, ''); // Remove '₹' and commas
+            const feeAmount = parseFloat(feeValue) || 0;
+
+            totalFeeSpan.textContent = `₹${feeAmount.toFixed(2)}`;
+        }
+
+        // Attach event listener to update total fee when the input changes
+        feeInput.addEventListener('input', updateTotalFee);
+
+    </script>
+   
 
 </main>
 
 {% endblock %}
+
+

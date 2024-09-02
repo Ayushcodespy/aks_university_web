@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            width: 400px;
+        }
+
+        .container h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #ffeaa7;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #dfe6e9;
+        }
+
+        .btn {
+            background: #6c5ce7;
+            color: #fff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: #013a85;
+        }
+
+        .btn i {
+            margin-right: 10px;
+        }
+
+        .logo {
+            width: 100px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="/static/images/aks-logo.png" alt="Company Logo" class="logo">
+        <h1>Secure Payment</h1>
+        <p>Pay your fees securely and quickly</p>
+        <button id="rzp-button1" class="btn btn-lg"><i class="fas fa-money-bill"></i> Pay Now</button>
+    </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            "key": "rzp_test_9XbJPu0vOzevBn", // Enter the Key ID generated from the Dashboard
+            "amount": "{{ pay*100 }}", // Ensure this is correctly rendered as an integer
+            "currency": "INR",
+            "description": "Ayush Patel",
+            "image": "example.com/image/rzp.jpg",
+            "prefill": {
+                "email": "ayush.jnv54@gmail.com",
+                "contact": "+916307425700", // The contact should be in string format with quotes
+            },
+            config: {
+                display: {
+                    blocks: {
+                        utib: {
+                            name: "Pay Using Axis Bank",
+                            instruments: [
+                                { method: "card", issuers: ["UTIB"] },
+                                { method: "netbanking", banks: ["UTIB"] }
+                            ]
+                        },
+                        other: {
+                            name: "Other Payment Methods",
+                            instruments: [
+                                { method: "card", issuers: ["ICIC"] },
+                                { method: 'netbanking' }
+                            ]
+                        }
+                    },
+                    hide: [
+                        { method: "upi" }
+                    ],
+                    sequence: ["block.utib", "block.other"],
+                    preferences: {
+                        show_default_blocks: false
+                    }
+                }
+            },
+            "handler": function (response) {
+                alert(response.razorpay_payment_id);
+            },
+            "modal": {
+                "ondismiss": function () {
+                    if (confirm("Are you sure you want to close the form?")) {
+                        console.log("Checkout form closed by the user");
+                    } else {
+                        console.log("Complete the Payment");
+                    }
+                }
+            }
+        };
+
+        var rzp1 = new Razorpay(options);
+        document.getElementById('rzp-button1').onclick = function (e) {
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+</body>
+</html>
