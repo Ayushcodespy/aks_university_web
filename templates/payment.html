@@ -90,63 +90,77 @@
     </div>
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script>
-        var options = {
-            "key": "rzp_test_9XbJPu0vOzevBn", // Enter the Key ID generated from the Dashboard
-            "amount": "{{ pay*100 }}", // Ensure this is correctly rendered as an integer
-            "currency": "INR",
-            "description": "Ayush Patel",
-            "image": "example.com/image/rzp.jpg",
-            "prefill": {
-                "email": "ayush.jnv54@gmail.com",
-                "contact": "+916307425700", // The contact should be in string format with quotes
-            },
-            config: {
-                display: {
-                    blocks: {
-                        utib: {
-                            name: "Pay Using Axis Bank",
-                            instruments: [
-                                { method: "card", issuers: ["UTIB"] },
-                                { method: "netbanking", banks: ["UTIB"] }
-                            ]
-                        },
-                        other: {
-                            name: "Other Payment Methods",
-                            instruments: [
-                                { method: "card", issuers: ["ICIC"] },
-                                { method: 'netbanking' }
-                            ]
-                        }
+<script>
+    var options = {
+        "key": "rzp_test_dqRgrGCBhYV2Ul", // Enter the Key ID generated from the Dashboard
+        "amount": "{{ pay*100 }}", // Ensure this is correctly rendered as an integer
+        "currency": "INR",
+        "description": "Ayush Patel",
+        "image": "example.com/image/rzp.jpg",
+        "prefill": {
+            "email": "ayush.jnv54@gmail.com",
+            "contact": "+916307425700", // The contact should be in string format with quotes
+        },
+        "config": {
+            "display": {
+                "blocks": {
+                    "utib": {
+                        "name": "Pay Using Axis Bank",
+                        "instruments": [
+                            { "method": "card", "issuers": ["UTIB"] },
+                            { "method": "netbanking", "banks": ["UTIB"] }
+                        ]
                     },
-                    hide: [
-                        { method: "upi" }
-                    ],
-                    sequence: ["block.utib", "block.other"],
-                    preferences: {
-                        show_default_blocks: false
+                    "other": {
+                        "name": "Other Payment Methods",
+                        "instruments": [
+                            { "method": "card", "issuers": ["ICIC"] },
+                            { "method": 'netbanking' }
+                        ]
                     }
-                }
-            },
-            "handler": function (response) {
-                alert(response.razorpay_payment_id);
-            },
-            "modal": {
-                "ondismiss": function () {
-                    if (confirm("Are you sure you want to close the form?")) {
-                        console.log("Checkout form closed by the user");
-                    } else {
-                        console.log("Complete the Payment");
-                    }
+                },
+                "hide": [
+                    { "method": "upi" }
+                ],
+                "sequence": ["block.utib", "block.other"],
+                "preferences": {
+                    "show_default_blocks": false
                 }
             }
-        };
-
-        var rzp1 = new Razorpay(options);
-        document.getElementById('rzp-button1').onclick = function (e) {
-            rzp1.open();
-            e.preventDefault();
+        },
+        "handler": function (response) {
+            // On successful payment
+            fetch('/payment-success', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    payment_id: response.razorpay_payment_id,
+                }),
+            }).then(function () {
+                window.location.href = '/fees';
+            }).catch(function (error) {
+                console.error('Error:', error);
+            });
+        },
+        "modal": {
+            "ondismiss": function () {
+                if (confirm("Are you sure you want to close the form?")) {
+                    console.log("Checkout form closed by the user");
+                } else {
+                    console.log("Complete the Payment");
+                }
+            }
         }
-    </script>
+    };
+
+    var rzp1 = new Razorpay(options);
+    document.getElementById('rzp-button1').onclick = function (e) {
+        rzp1.open();
+        e.preventDefault();
+    }
+</script>
+
 </body>
 </html>

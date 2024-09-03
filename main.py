@@ -2,6 +2,8 @@ from flask import Flask, Response, abort, redirect, render_template, request, se
 from flask_mail import Mail, Message
 import mysql.connector
 import random
+import razorpay
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = "super-secret-key"
@@ -15,6 +17,10 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
 # ------------------------------------------------------------------
+
+# Initialize Razorpay client
+razorpay_client = razorpay.Client(auth=("rzp_test_dqRgrGCBhYV2Ul", "OihbG5dQPxWMYXDjnAmMNjd9"))
+
 
 
 mydb = mysql.connector.connect(
@@ -100,7 +106,7 @@ def fees():
     _fees = cursor.fetchall()
     paid = 0
     for i in _fees:
-        print(i)
+        # print(i)
         paid += i[0]
 
     if paid < 60000:
@@ -110,8 +116,46 @@ def fees():
     else:
         status = 'CLEAR'
         amount_to_be_paid = 0.00
-    print(amount_to_be_paid)
+    # print(amount_to_be_paid)
     return render_template("fee_page.html", result=result, fees=amount_to_be_paid, status=status)
+
+
+@app.route('/payment', methods=['GET', 'POST'])
+def payment():
+    if request.method == 'POST':
+        amount_paid = request.form['selected_fees']
+        return render_template('payment.html', pay = float(amount_paid))
+    
+
+@app.route('/payment-success', methods=['POST'])
+def payment_success():
+    if request.method == 'POST':
+        # Get the payment_id from the request
+        payment_id = request.json.get('payment_id')
+
+        try:
+            # Fetch the payment details from Razorpay
+            payment = razorpay_client.payment.fetch(payment_id)
+
+            # Extract the amount (it is in the smallest currency unit, e.g., paise for INR)
+            amount = payment['amount'] / 100  # Convert to actual currency unit (e.g., from paise to INR)
+
+            # You can also extract other details like:
+            currency = payment['currency']
+            status = payment['status']
+
+            # Now, you can store these details in your database, update the payment status, etc.
+            cursor.execute("INSERT INTO Fee_Details values(%s, %s, %s, %s)", (session['user'], amount, datetime.now().date(), 5,))
+            mydb.commit()
+
+            # Redirect to the fees page
+            return redirect(url_for('fees'))
+
+        except razorpay.errors.BadRequestError as e:
+            # Handle error if payment_id is invalid or Razorpay API call fails
+            return f"An error occurred: {str(e)}", 400
+
+
 
 
 @app.route("/logout")
