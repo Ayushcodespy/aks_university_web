@@ -24,7 +24,7 @@ razorpay_client = razorpay.Client(auth=("rzp_test_dqRgrGCBhYV2Ul", "OihbG5dQPxWM
 
 
 mydb = mysql.connector.connect(
-    host="mysql-dkns.railway.internal",
+    host="junction.proxy.rlwy.net",
     user="root",
     passwd="xvVvFlzkwAgJJUyFWvKMGnRqIzsFnbzX",
     database="railway",
